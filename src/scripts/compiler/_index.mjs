@@ -20,21 +20,22 @@ let section = (title, boundary) => {
 
 //
 
+let sections = {
+   "symbols": "[^\\w\\s]",
+   "numbers": "\\d"
+};
+
 // {{ sections }}
 {
-   let sections = [];
+   let temp = [];
 
-   for (let s of sectionsJson) sections.push(`[${capitalize(s.name)}](#${s.name})`);
+   for (let s in sections) temp.push(`[${capitalize(s)}](#${s})`);
 
-   replace('{{ sections }}', sections.join(' '));
+   replace('{{ sections }}', temp.join(' '));
 }
 
 // {{ list }}
 {
-   let sections = {
-      "symbols": "[^\\w\\s]",
-      "numbers": "\\d"
-   };
    let list = '';
 
    for (let s in sections) list += section(s, sections[s]);

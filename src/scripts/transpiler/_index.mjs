@@ -11,5 +11,5 @@ const yml = db('abbrs/.yml');
 {
    let json = yaml.load(yml);
 
-   writeFileSync(join(dbOrigin, '.json'), JSON.stringify(json, null, 3), 'utf8');
+   writeFileSync(join(dbOrigin, 'abbrs/.json'), JSON.stringify(json, null, 3), 'utf8');
 }

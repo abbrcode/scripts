@@ -1,8 +1,8 @@
 {
    "scripts": {
       "start": "npm run transpile && npm run compile",
-      "compile": "node ./src/scripts/compiler/index.mjs",
-      "transpile": "node ./src/scripts/transpiler/index.mjs"
+      "compile": "node ./src/scripts/compiler/_index.mjs",
+      "transpile": "node ./src/scripts/transpiler/_index.mjs"
    },
    "devDependencies": {
       "js-yaml": "^4.1.0"
