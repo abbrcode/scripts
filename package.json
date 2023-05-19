@@ -1,5 +1,7 @@
 {
    "scripts": {
+      "start": "npm run transpile && npm run compile",
+      "compile": "node ./src/scripts/compiler/index.mjs",
       "transpile": "node ./src/scripts/transpiler/index.mjs"
    },
    "devDependencies": {
