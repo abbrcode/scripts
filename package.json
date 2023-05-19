@@ -1,4 +1,7 @@
 {
+   "scripts": {
+      "transpile": "node ./src/scripts/transpiler/index.mjs"
+   },
    "devDependencies": {
       "js-yaml": "^4.1.0"
    }
