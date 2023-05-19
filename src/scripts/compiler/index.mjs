@@ -4,15 +4,16 @@ import capitalize from './capitalize.mjs';
 import db from '../../lib/db.mjs';
 import { property, replace, template } from './template.mjs';
 
-let abbrsJson = db('abbrs/.json');
-let sectionsJson = db('sections.json');
+const abbrInCodeOrigin = '../abbreviations-in-code/README.md';
 
-export let section = (title, boundary) => {
+let abbrsJson = db('abbrs/.json');
+
+let section = (title, boundary) => {
    let s = `### ${capitalize(title)}\n`;
 
-   let abbrsOfLetter = abbrsJson.filter(a => a.word[0].match(boundary));
+   let abbrs = abbrsJson.filter(a => a.word[0].match(boundary));
 
-   for (let abbr of abbrsOfLetter) s += property(abbr);
+   for (let abbr of abbrs) s += property(abbr);
 
    return `${s}\n`;
 };
@@ -30,9 +31,13 @@ export let section = (title, boundary) => {
 
 // {{ list }}
 {
+   let sections = {
+      "symbols": "[^\\w\\s]",
+      "numbers": "\\d"
+   };
    let list = '';
 
-   for (let s of sectionsJson) list += section(s.name, s.boundary);
+   for (let s in sections) list += section(s, sections[s]);
    for (let letter of 'abcdefghijklmnopqrstuvwxyz') list += section(letter, letter);
 
    replace('{{ list }}', list);
@@ -40,7 +45,7 @@ export let section = (title, boundary) => {
 
 // {{ length }}
 {
-   replace('{{ length }}', `${abbrsJson.length} abbrs in the list`);
+   replace('{{ length }}', abbrsJson.length);
 }
 
-writeFileSync('../abbreviations-in-code/README.md', template, 'utf8');
+writeFileSync(abbrInCodeOrigin, template, 'utf8');

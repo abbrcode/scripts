@@ -1,10 +1,10 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 
-const abbrincodeDir = '../db';
+export const dbOrigin = '../db';
 
 export default path => {
-   let data = readFileSync(join(abbrincodeDir, path), 'utf8');
+   let data = readFileSync(join(dbOrigin, path), 'utf8');
 
    if (path.split('.')[1] === 'json') data = JSON.parse(data);
 
